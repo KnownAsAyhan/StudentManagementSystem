@@ -2,7 +2,7 @@ package StudentManagement;
 
 public class Student {
     private String fullName;
-    private String studentId;
+    private final String studentId;
     private String department;
     private int year;
     private double gpa;
@@ -25,7 +25,6 @@ public class Student {
     public String getCity() { return city; }
 
     public void setFullName(String fullName) { this.fullName = fullName; }
-    public void setStudentId(String studentId) { this.studentId = studentId; }
     public void setDepartment(String department) { this.department = department; }
     public void setYear(int year) { this.year = year; }
     public void setGpa(double gpa) { this.gpa = gpa; }

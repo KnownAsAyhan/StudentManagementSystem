@@ -118,14 +118,7 @@ public class Main {
                     if (!matches.isEmpty()) {
                         System.out.println("Matching students:");
                         for (Student st : matches) {
-                            System.out.println("------------------------------");
-                            System.out.println("Name       : " + st.getFullName());
-                            System.out.println("ID         : " + st.getStudentId());
-                            System.out.println("Department : " + st.getDepartment());
-                            System.out.println("Year       : " + st.getYear());
-                            System.out.println("GPA        : " + st.getGpa());
-                            System.out.println("City       : " + st.getCity());
-                            System.out.println("------------------------------");
+                            StudentManager.displayStudent(st);
                         }
 
                         System.out.print("Do you want to (e)dit, (d)elete, or (s)kip?: ");
@@ -210,14 +203,7 @@ public class Main {
                     if (!manager.getStudents().isEmpty()) {
                         System.out.println("Sorted List:");
                         for (Student st : manager.getStudents()) {
-                            System.out.println("------------------------------");
-                            System.out.println("Name       : " + st.getFullName());
-                            System.out.println("ID         : " + st.getStudentId());
-                            System.out.println("Department : " + st.getDepartment());
-                            System.out.println("Year       : " + st.getYear());
-                            System.out.println("GPA        : " + st.getGpa());
-                            System.out.println("City       : " + st.getCity());
-                            System.out.println("------------------------------");
+                            StudentManager.displayStudent(st);
                         }
                     } else {
                         System.out.println("No students to show.");

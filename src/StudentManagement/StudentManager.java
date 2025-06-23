@@ -3,7 +3,7 @@ package StudentManagement;
 import java.util.*;
 
 public class StudentManager {
-    private ArrayList<Student> students = new ArrayList<>();
+    private final ArrayList<Student> students = new ArrayList<>();
 
     public void addStudent(Student s) {
         students.add(s);
@@ -13,26 +13,11 @@ public class StudentManager {
     public void listStudents() {
         System.out.println("Total students: " + students.size());
         for (Student s : students) {
-            System.out.println("------------------------------");
-            System.out.println("Name       : " + s.getFullName());
-            System.out.println("ID         : " + s.getStudentId());
-            System.out.println("Department : " + s.getDepartment());
-            System.out.println("Year       : " + s.getYear());
-            System.out.println("GPA        : " + s.getGpa());
-            System.out.println("City       : " + s.getCity());
-            System.out.println("------------------------------");
-
+            displayStudent(s);
         }
     }
 
-    public Student searchById(String id) {
-        for (Student s : students) {
-            if (s.getStudentId().equalsIgnoreCase(id)) {
-                return s;
-            }
-        }
-        return null;
-    }
+
 
     public void deleteStudent(Student s) {
         students.remove(s);
@@ -53,13 +38,24 @@ public class StudentManager {
         System.out.println("Student updated.");
     }
 
-    public void sortByGpa() {
-        students.sort(Comparator.comparingDouble(Student::getGpa).reversed());
-        System.out.println("Sorted by GPA (high to low).");
-    }
+
 
     public ArrayList<Student> getStudents() {
         return students;
     }
+
+
+
+    public static void displayStudent(Student s) {
+        System.out.println("------------------------------");
+        System.out.println("Name       : " + s.getFullName());
+        System.out.println("ID         : " + s.getStudentId());
+        System.out.println("Department : " + s.getDepartment());
+        System.out.println("Year       : " + s.getYear());
+        System.out.println("GPA        : " + s.getGpa());
+        System.out.println("City       : " + s.getCity());
+        System.out.println("------------------------------");
+    }
+
 }
 
