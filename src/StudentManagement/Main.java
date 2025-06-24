@@ -18,6 +18,7 @@ public class Main {
             System.out.println("3. Search student");
             System.out.println("4. Sort students");
             System.out.println("5. Save and Exit");
+            System.out.println("6. Filter students");
             System.out.print("Choose an option: ");
             String choice = input.nextLine();
 
@@ -217,6 +218,93 @@ public class Main {
                     System.out.println("Exiting... Bye!");
                     input.close();
                     return;
+
+                case "6":
+                    System.out.println("--- Advanced Filtering ---");
+                    System.out.print("Enter full name (or leave blank): ");
+                    String filterName = input.nextLine().trim();
+
+                    System.out.print("Enter department (or leave blank): ");
+                    String filterDept = input.nextLine().trim();
+
+                    System.out.print("Enter city (or leave blank): ");
+                    String filterCity = input.nextLine().trim();
+
+                    System.out.print("Enter minimum year (or leave blank): ");
+                    String minYearStr = input.nextLine().trim();
+
+                    System.out.print("Enter maximum year (or leave blank): ");
+                    String maxYearStr = input.nextLine().trim();
+
+                    System.out.print("Enter minimum GPA (or leave blank): ");
+                    String minGpaStr = input.nextLine().trim();
+
+                    System.out.print("Enter maximum GPA (or leave blank): ");
+                    String maxGpaStr = input.nextLine().trim();
+
+                    ArrayList<Student> filtered = new ArrayList<>();
+
+                    for (Student st : manager.getStudents()) {
+                        boolean match = true;
+
+                        if (!filterName.isEmpty() && !st.getFullName().equalsIgnoreCase(filterName)) match = false;
+                        if (!filterDept.isEmpty() && !st.getDepartment().equalsIgnoreCase(filterDept)) match = false;
+                        if (!filterCity.isEmpty() && !st.getCity().equalsIgnoreCase(filterCity)) match = false;
+
+                        // Year range filtering
+                        if (!minYearStr.isEmpty()) {
+                            try {
+                                int minYear = Integer.parseInt(minYearStr);
+                                if (st.getYear() < minYear) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid minimum year input.");
+                                match = false;
+                            }
+                        }
+                        if (!maxYearStr.isEmpty()) {
+                            try {
+                                int maxYear = Integer.parseInt(maxYearStr);
+                                if (st.getYear() > maxYear) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid maximum year input.");
+                                match = false;
+                            }
+                        }
+
+                        // GPA range filtering
+                        if (!minGpaStr.isEmpty()) {
+                            try {
+                                double minGpa = Double.parseDouble(minGpaStr);
+                                if (st.getGpa() < minGpa) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid minimum GPA input.");
+                                match = false;
+                            }
+                        }
+                        if (!maxGpaStr.isEmpty()) {
+                            try {
+                                double maxGpa = Double.parseDouble(maxGpaStr);
+                                if (st.getGpa() > maxGpa) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid maximum GPA input.");
+                                match = false;
+                            }
+                        }
+
+                        if (match) filtered.add(st);
+                    }
+
+                    if (!filtered.isEmpty()) {
+                        System.out.println("Matching students:");
+                        for (Student st : filtered) {
+                            StudentManager.displayStudent(st);
+                        }
+                    } else {
+                        System.out.println("No students matched the given filters.");
+                    }
+                    break;
+
+
 
                 default:
                     System.out.println("Invalid choice.");
