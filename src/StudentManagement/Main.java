@@ -230,11 +230,17 @@ public class Main {
                     System.out.print("Enter city (or leave blank): ");
                     String filterCity = input.nextLine().trim();
 
-                    System.out.print("Enter year (or leave blank): ");
-                    String yearStr = input.nextLine().trim();
+                    System.out.print("Enter minimum year (or leave blank): ");
+                    String minYearStr = input.nextLine().trim();
+
+                    System.out.print("Enter maximum year (or leave blank): ");
+                    String maxYearStr = input.nextLine().trim();
 
                     System.out.print("Enter minimum GPA (or leave blank): ");
-                    String gpaStr = input.nextLine().trim();
+                    String minGpaStr = input.nextLine().trim();
+
+                    System.out.print("Enter maximum GPA (or leave blank): ");
+                    String maxGpaStr = input.nextLine().trim();
 
                     ArrayList<Student> filtered = new ArrayList<>();
 
@@ -245,22 +251,42 @@ public class Main {
                         if (!filterDept.isEmpty() && !st.getDepartment().equalsIgnoreCase(filterDept)) match = false;
                         if (!filterCity.isEmpty() && !st.getCity().equalsIgnoreCase(filterCity)) match = false;
 
-                        if (!yearStr.isEmpty()) {
+                        // Year range filtering
+                        if (!minYearStr.isEmpty()) {
                             try {
-                                int filterYear = Integer.parseInt(yearStr);
-                                if (st.getYear() != filterYear) match = false;
+                                int minYear = Integer.parseInt(minYearStr);
+                                if (st.getYear() < minYear) match = false;
                             } catch (Exception e) {
-                                System.out.println("Invalid year input.");
+                                System.out.println("Invalid minimum year input.");
+                                match = false;
+                            }
+                        }
+                        if (!maxYearStr.isEmpty()) {
+                            try {
+                                int maxYear = Integer.parseInt(maxYearStr);
+                                if (st.getYear() > maxYear) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid maximum year input.");
                                 match = false;
                             }
                         }
 
-                        if (!gpaStr.isEmpty()) {
+                        // GPA range filtering
+                        if (!minGpaStr.isEmpty()) {
                             try {
-                                double filterGpa = Double.parseDouble(gpaStr);
-                                if (st.getGpa() < filterGpa) match = false;
+                                double minGpa = Double.parseDouble(minGpaStr);
+                                if (st.getGpa() < minGpa) match = false;
                             } catch (Exception e) {
-                                System.out.println("Invalid GPA input.");
+                                System.out.println("Invalid minimum GPA input.");
+                                match = false;
+                            }
+                        }
+                        if (!maxGpaStr.isEmpty()) {
+                            try {
+                                double maxGpa = Double.parseDouble(maxGpaStr);
+                                if (st.getGpa() > maxGpa) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid maximum GPA input.");
                                 match = false;
                             }
                         }
@@ -277,6 +303,7 @@ public class Main {
                         System.out.println("No students matched the given filters.");
                     }
                     break;
+
 
 
                 default:
