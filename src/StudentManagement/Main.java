@@ -18,6 +18,7 @@ public class Main {
             System.out.println("3. Search student");
             System.out.println("4. Sort students");
             System.out.println("5. Save and Exit");
+            System.out.println("6. Filter students");
             System.out.print("Choose an option: ");
             String choice = input.nextLine();
 
@@ -217,6 +218,66 @@ public class Main {
                     System.out.println("Exiting... Bye!");
                     input.close();
                     return;
+
+                case "6":
+                    System.out.println("--- Advanced Filtering ---");
+                    System.out.print("Enter full name (or leave blank): ");
+                    String filterName = input.nextLine().trim();
+
+                    System.out.print("Enter department (or leave blank): ");
+                    String filterDept = input.nextLine().trim();
+
+                    System.out.print("Enter city (or leave blank): ");
+                    String filterCity = input.nextLine().trim();
+
+                    System.out.print("Enter year (or leave blank): ");
+                    String yearStr = input.nextLine().trim();
+
+                    System.out.print("Enter minimum GPA (or leave blank): ");
+                    String gpaStr = input.nextLine().trim();
+
+                    ArrayList<Student> filtered = new ArrayList<>();
+
+                    for (Student st : manager.getStudents()) {
+                        boolean match = true;
+
+                        if (!filterName.isEmpty() && !st.getFullName().equalsIgnoreCase(filterName)) match = false;
+                        if (!filterDept.isEmpty() && !st.getDepartment().equalsIgnoreCase(filterDept)) match = false;
+                        if (!filterCity.isEmpty() && !st.getCity().equalsIgnoreCase(filterCity)) match = false;
+
+                        if (!yearStr.isEmpty()) {
+                            try {
+                                int filterYear = Integer.parseInt(yearStr);
+                                if (st.getYear() != filterYear) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid year input.");
+                                match = false;
+                            }
+                        }
+
+                        if (!gpaStr.isEmpty()) {
+                            try {
+                                double filterGpa = Double.parseDouble(gpaStr);
+                                if (st.getGpa() < filterGpa) match = false;
+                            } catch (Exception e) {
+                                System.out.println("Invalid GPA input.");
+                                match = false;
+                            }
+                        }
+
+                        if (match) filtered.add(st);
+                    }
+
+                    if (!filtered.isEmpty()) {
+                        System.out.println("Matching students:");
+                        for (Student st : filtered) {
+                            StudentManager.displayStudent(st);
+                        }
+                    } else {
+                        System.out.println("No students matched the given filters.");
+                    }
+                    break;
+
 
                 default:
                     System.out.println("Invalid choice.");
