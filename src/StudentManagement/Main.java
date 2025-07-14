@@ -62,15 +62,25 @@ public class Main {
                         }
                     }
 
-                    String city;
-                    do {
-                        System.out.print("City: ");
-                        city = input.nextLine();
-                    } while (!city.matches("[A-Za-z ]+"));
+                String city;
+                do {
+                    System.out.print("City: ");
+                    city = input.nextLine();
+                } while (!city.matches("[A-Za-z ]+"));
 
-                    Student s = new Student(name, id, dept, year, gpa, city);
-                    manager.addStudent(s);
+                    final String finalId = id; // ✅ make it effectively final
+                    boolean exists = manager.getStudents().stream()
+                            .anyMatch(st -> st.getStudentId().equals(finalId));
+
+                    if (exists) {
+                    System.out.println("Student with this ID already exists. Try again.");
                     break;
+                }
+
+                Student s = new Student(name, id, dept, year, gpa, city);
+                manager.addStudent(s);
+                break;
+
 
                 case "2":
                     manager.listStudents();
@@ -179,6 +189,7 @@ public class Main {
 
                 case "5":
                     FileHandler.saveStudents(filePath, manager.getStudents());
+                    System.out.println("Last saved on: " + java.time.LocalDateTime.now());
                     System.out.println("Exiting... Bye!");
                     input.close();
                     return;

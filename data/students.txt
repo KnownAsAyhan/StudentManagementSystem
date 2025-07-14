@@ -1,3 +1,11 @@
 Ayhan Niyazli;17856;CE;2027;2.0;Sumgait
 Eli Eliyev;12345;XX;2222;2.0;Moon
-Test Test;11111;Test;2111;2.5;Test
+Memmed;52450;Art;2028;2.0;Qazax
+Aslan;11111;CE;2027;3.0;Sumgait
+Eli Memmedov;22486;Art;2030;2.3;Gence
+Turan Hesenov;19654;CE;2027;3.2;Sumgait
+Huseyin Eliyev;52142;Math;2026;1.5;Gence
+Hesen Dunyamaliyev;12331;Math;2028;2.5;Gence
+Memmed Quliyev;12348;Art;2029;1.9;Masalli
+Esmer Quliyeva;32944;Math;2030;4.0;Sumgait
+Fidan Anvar;99999;Law;2099;4.0;Sumgait
